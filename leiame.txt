@@ -1,7 +1,4 @@
-Não realizei o teste com Selection Sort por que o mesmo demorou muito para ser finalizado
-todavia, foi notório que o desempenho do merge_sort Puro obteve mais desempenho que o personalizado, onde 
-seu tempo de execução em todos os testes foi menor 1 segundo enquanto o personalizado demorou mais que 
-5 segundo já na segunda tentativa.
+﻿Merge_Sort Sem Slice está na parte das funções.
 
-Para o mergen sort sem slice, eu criei um split recebendo a lista com duas variáveis que apontava para pecorrer
-do inicio para o meio e o meio até o fim
+Observando a comparação de desempenho, o merger sort Original obteve mais desempenho no primeiro e segundo caso com 1000 e 10000 dados armazenados na lista, todavia, no terceiro caso o híbrido obteve melhor resultado.
+Os testes com SelectionSort estão comentado por não permitir a finalização do programa.

@@ -6,49 +6,67 @@ def gerar_lista(tamanho):
     lista = [random.randrange(1,tamanho,1) for _ in range(tamanho)]
     return lista
 
-def hibrido(a,b,c):
+def print_resultado(list, resultado_total):
+    list.sort()
+    maior = float(list[-1])
+    menor = float(list[0])
+    resultado_total = 0
+    for i in range(len(list)):
+        resultado_total += list[i]
+    print(f"O tempo de execução do teste foi de: {resultado_total:.8f}\nTempo Mínimo: {menor:.9f}\nTempo Máximo: {maior:.9f}\nMédia: {(resultado_total/100):.8f}\n")
 
-    print("----------------------------!Ordenação Híbrida!----------------------------\n")
-    inicio_primeiro_teste = time.time()
+def testes_desempenhos(x):
+
+    print("Ordenação Personalizada: \n")
+    lista = []
+    resultado_total = 0
     for _ in range(100):
-        ordenacao_personalizada(a)
-    fim_primeiro_teste = time.time()
-    print(f"O tempo de execução da Ordenação Híbrida com 1000 elementos levou: {fim_primeiro_teste-inicio_primeiro_teste:.4f}")
+        inicio_teste = time.time()
+        ordenacao_personalizada(x)
+        fim_teste = time.time()
+        lista.append(fim_teste-inicio_teste)
+        resultado_total += fim_teste-inicio_teste
 
-    inicio_segundo_teste = time.time()
+    print_resultado(lista, resultado_total)
+
+    print("Mergen Original: \n")
+    lista = []
+    resultado_total = 0
     for _ in range(100):
-       ordenacao_personalizada(b)
-    fim_segundo_teste = time.time()
-    print(f"O tempo de execução da Ordenação Híbrida com 10000 elementos levou: {fim_segundo_teste-inicio_segundo_teste:.4f}")
+        inicio_teste = time.time()
+        merge_original(x)
+        fim_teste = time.time()
+        lista.append(fim_teste-inicio_teste)
+        resultado_total += (fim_teste-inicio_teste)
 
-    inicio_terceiro_teste = time.time()
-    for _ in range(100):
-        ordenacao_personalizada(c)
-    fim_terceiro_teste = time.time()
-    print(f"O tempo de execução da Ordenação Híbrida com 100000 elementos levou: {fim_terceiro_teste-inicio_terceiro_teste:.4f}\n")
+    print_resultado(lista, resultado_total)
 
-    print("---------------------------------------------------------------------------\n")
 
-def merge_originall(a,b,c):
+    # print("SelectionSort: \n")
+    # lista = []
+    # resultado_total = 0
+    # for _ in range(100):
+    #     inicio_teste = time.time()
+    #     selectionSort(x)
+    #     fim_teste = time.time()
+    #     lista.append(fim_teste-inicio_teste)
+    #     resultado_total += (fim_teste-inicio_teste)
 
-    print("----------------------------!MergeSort Original!----------------------------\n")
-    inicio_primeiro_teste = time.time()
-    merge_original(a)
-    fim_primeiro_teste = time.time()
-    print(f"O tempo de execução da Ordenação MergeSort Original com 1000 elementos levou: {fim_primeiro_teste-inicio_primeiro_teste:.4f}")
+    # print_resultado(lista, resultado_total)
 
-    inicio_segundo_teste = time.time()
-    mergeSort_sem_slice(b)
-    fim_segundo_teste = time.time()
-    print(f"O tempo de execução da Ordenação MergeSort Original com 10000 elementos levou: {fim_segundo_teste-inicio_segundo_teste:.4f}")
+def chamando_fuc(a,b,c):
+    print("----------------------------!Lista com 1000 Elementos 100x!----------------------------\n")
 
-    inicio_terceiro_teste = time.time()
-    merge_original(c)
-    fim_terceiro_teste = time.time()
-    print(f"O tempo de execução da Ordenação MergeSort Original com 100000 elementos levou: {fim_terceiro_teste-inicio_terceiro_teste:.4f}\n")
+    testes_desempenhos(a)
 
-    print("---------------------------------------------------------------------------\n")
 
+    print("----------------------------!Lista com 10000 Elementos 100x!----------------------------\n")
+
+    testes_desempenhos(b)
+
+    print("----------------------------!Lista com 100000 Elementos 100x!----------------------------\n")
+
+    testes_desempenhos(c)
 
 
 def main():
@@ -56,10 +74,8 @@ def main():
     b = gerar_lista(10000)
     c = gerar_lista(100000)
 
-    merge_originall(a,b,c)
-    hibrido(a,b,c)
+    chamando_fuc(a,b,c)
 
-# Não foi realizado o teste com selectionSort1, por que demora muito tempo
 
 if __name__ == "__main__":
     main()
